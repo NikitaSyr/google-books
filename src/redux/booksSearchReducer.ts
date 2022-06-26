@@ -19,6 +19,7 @@ const initialState: IState = {
 export const booksSearchReducer = (state = initialState, action: any): IState => {
     switch (action.type) {
         case GET_BOOKS_DATA_REQUEST: {
+            console.log('reducer')
             return {
                 ...state,
                 fetching: true
