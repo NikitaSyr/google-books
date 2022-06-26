@@ -4,8 +4,8 @@ import {BooksSearch} from "./components/BooksSearch/BooksSearch";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
+        <div>
+            <header>
             </header>
             <BooksSearch/>
         </div>

@@ -1,43 +1,67 @@
 import {AppState} from "./reduxStore";
+import IBook, {
+    BookSearchCategories,
+    BooksSearchActions,
+    BooksSearchSortDirection,
+    GetBooksDataRequest,
+    IBooksSearchParams,
+    SetBooksData,
+    SetErrorMessage,
+    SetIsFetching,
+} from "../types/types";
 
 export const GET_BOOKS_DATA_REQUEST = 'google-books/booksSearch/GET_BOOKS_DATA_REQUEST';
-export const SET_BOOKS_DATA_SUCCESS = 'google-books/booksSearch/SET_BOOKS_DATA_SUCCESS';
+export const SET_BOOKS_DATA = 'google-books/booksSearch/SET_BOOKS_DATA';
+export const SET_IS_FETCHING = 'google-books/booksSearch/SET_IS_FETCHING';
 export const SET_ERROR_MESSAGE = 'google-books/booksSearch/SET_ERROR_MESSAGE';
 
 interface IState {
-    booksData: any,
-    fetching: boolean,
+    booksSearchParams: IBooksSearchParams,
+    booksData: IBook[],
+    totalBooksCount: number | null,
+    isFetching: boolean,
     errorMessage: string | null
 }
 
+const initialSearchParams: IBooksSearchParams = {
+    textToSearch: "",
+    category: BookSearchCategories.all,
+    sortDirection: BooksSearchSortDirection.relevance
+}
+
 const initialState: IState = {
+    booksSearchParams: initialSearchParams,
     booksData: [],
-    fetching: false,
+    totalBooksCount: null,
+    isFetching: false,
     errorMessage: null
 }
 //BooksSearchActions
-export const booksSearchReducer = (state = initialState, action: any): IState => {
+export const booksSearchReducer = (state = initialState, action: BooksSearchActions): IState => {
     switch (action.type) {
         case GET_BOOKS_DATA_REQUEST: {
             return {
                 ...state,
-                fetching: true
+                booksSearchParams: action.payload.booksSearchParams
             }
         }
-        case SET_BOOKS_DATA_SUCCESS: {
+        case SET_BOOKS_DATA: {
             return {
                 ...state,
-                booksData: action.payload,
-                fetching: false,
-                errorMessage: null
+                booksData: action.payload.booksData,
+                totalBooksCount: action.payload.totalBooksCount
+            }
+        }
+        case SET_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.payload.isFetching
             }
         }
         case SET_ERROR_MESSAGE: {
             return {
                 ...state,
-                booksData: [],
-                fetching: false,
-                errorMessage: action.payload
+                errorMessage: action.payload.errorMessage
             }
         }
         default:
@@ -46,20 +70,28 @@ export const booksSearchReducer = (state = initialState, action: any): IState =>
 }
 
 export const actions = {
-    getBooksDataRequestAC: (payload: any) => ({
+    getBooksDataRequestAC: (booksSearchParams: IBooksSearchParams): GetBooksDataRequest => ({
         type: GET_BOOKS_DATA_REQUEST,
-        payload
+        payload: {booksSearchParams}
     }),
-    setBooksDataAC: (payload: any) => ({
-        type: SET_BOOKS_DATA_SUCCESS,
-        payload
+    setBooksDataAC: (booksData: IBook[], totalBooksCount: number): SetBooksData => ({
+        type: SET_BOOKS_DATA,
+        payload: {booksData, totalBooksCount}
     }),
-    setErrorMessageAC: (payload: any) => ({
+    setErrorMessageAC: (errorMessage: string | null): SetErrorMessage => ({
         type: SET_ERROR_MESSAGE,
-        payload
+        payload: {errorMessage}
+    }),
+    setIsFetchingAC: (isFetching: boolean): SetIsFetching => ({
+        type: SET_IS_FETCHING,
+        payload: {isFetching}
     })
 }
 
-export const getBooksData = (state: AppState): any => {
+export const getBooksData = (state: AppState): IBook[] => {
     return state.booksSearchPage.booksData
+}
+
+export const getSearchParams = (state: AppState): IBooksSearchParams => {
+    return state.booksSearchPage.booksSearchParams
 }
