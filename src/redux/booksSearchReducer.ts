@@ -40,6 +40,7 @@ const initialState: IState = {
 export const booksSearchReducer = (state = initialState, action: BooksSearchActions): IState => {
     switch (action.type) {
         case GET_BOOKS_DATA_REQUEST: {
+            console.log('reducer')
             return {
                 ...state,
                 booksSearchParams: action.payload.booksSearchParams
