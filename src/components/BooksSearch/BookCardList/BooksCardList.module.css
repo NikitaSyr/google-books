@@ -1,0 +1,12 @@
+.booksCardList{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin: 0 12%;
+    max-width: 1850px;
+}
+
+.loadMoreButton{
+    margin: 10px auto 20px;
+}

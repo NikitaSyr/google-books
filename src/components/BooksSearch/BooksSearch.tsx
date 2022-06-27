@@ -1,26 +1,18 @@
-import {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {actions, getBooksData} from "../../redux/booksSearchReducer";
-import {BookSearchCategories, BooksSearchSortDirection} from "../../types/types";
+import {BooksSearchForm} from "./BooksSearchForm/BooksSearchForm";
+import {BooksCardList} from "./BookCardList/BooksCardList";
+import s from "./BooksSearch.module.css"
+import {useSelector} from "react-redux";
+import {getIsFetching} from "../../redux/booksSearchReducer";
+import {Spin} from "antd";
 
 export const BooksSearch = () => {
-    const dispatch = useDispatch();
-    const firstData = useSelector(getBooksData)
-    // useEffect(() => {
-    //     dispatch(actions.setBooksDataAC({}))
-    // }, []);
-    const textToSearch = "";
-    const sortDirection = BooksSearchSortDirection.relevance;
-    const category = BookSearchCategories.all
-    const loadData = () => {
-        console.log({textToSearch, sortDirection, category})
-        console.log(firstData)
-        dispatch(actions.getBooksDataRequestAC({textToSearch, sortDirection, category}))
-    }
+    const isFetching = useSelector(getIsFetching)
 
     return (
-        <div>
-            <button onClick={loadData}>Жмак</button>
+        <div className={s.booksSearch}>
+            <BooksSearchForm/>
+            {isFetching && <Spin size={"large"} className={s.antdSpin}/>}
+            <BooksCardList/>
         </div>
     )
 }

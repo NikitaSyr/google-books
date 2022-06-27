@@ -1,0 +1,1 @@
+export const BOOKS_SEARCH_PAGINATION_COUNT = 30;

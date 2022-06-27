@@ -1,0 +1,31 @@
+.booksSearchForm{
+    background: url("https://images.squarespace-cdn.com/content/v1/5b1663b945776e1335db7558/1528194286273-Q18RN3IYJKN39CJSWLR5/Bookprizebanner.jpg?format=2500w") no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.antdForm{
+    flex: 1 1 60%;
+    width: 60%;
+    min-width: 250px;
+}
+
+@media all and (max-width: 600px) {
+    .antdForm{
+        flex: 0 1 95%;
+        width: 95%;
+    }
+}
+
+.antdFormRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 10px;
+}
+
+.antdFormItem{
+    padding: 0 10px;
+}

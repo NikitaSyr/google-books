@@ -1,20 +1,31 @@
-import {GET_BOOKS_DATA_REQUEST, SET_BOOKS_DATA, SET_ERROR_MESSAGE, SET_IS_FETCHING} from "../redux/booksSearchReducer";
+import {
+    GET_BOOKS_DATA_INITIAL_REQUEST,
+    GET_MORE_BOOKS_DATA_REQUEST,
+    SET_BOOKS_DATA,
+    SET_ERROR_MESSAGE,
+    SET_IS_FETCHING
+} from "../redux/booksSearchReducer";
 
 export default interface IBook {
     id: string
     title: string
     authors: string[]
     categories: string[]
-    description: string
+    description?: string
     image: string
 }
 
 export interface IBooksSearchParams {
     textToSearch: string
-    // category: "all" | "art" | "biography" | "computers" | "history" | "medical" | "poetry",
-    category: BookSearchCategories
-    sortDirection: BooksSearchSortDirection
+    category: "all" | "art" | "biography" | "computers" | "history" | "medical" | "poetry",
+    sortDirection: "relevance" | "newest"
 }
+
+export interface BooksAPIReturn {
+    items: any
+    totalItems: number
+}
+
 
 export interface GetBooksDataRequestPayload {
     booksSearchParams: IBooksSearchParams
@@ -33,9 +44,13 @@ export interface SetIsFetchingPayload {
     isFetching: boolean
 }
 
-export interface GetBooksDataRequest {
-    type: typeof GET_BOOKS_DATA_REQUEST;
+export interface GetBooksDataInitialRequest {
+    type: typeof GET_BOOKS_DATA_INITIAL_REQUEST;
     payload: GetBooksDataRequestPayload
+}
+
+export interface GetMoreBooksDataRequest {
+    type: typeof GET_MORE_BOOKS_DATA_REQUEST
 }
 export interface SetBooksData {
     type: typeof SET_BOOKS_DATA;
@@ -52,15 +67,15 @@ export interface SetIsFetching {
 
 
 export type BooksSearchActions =
-    | GetBooksDataRequest
+    | GetBooksDataInitialRequest
     | SetBooksData
     | SetErrorMessage
     | SetIsFetching
 
-export enum BookSearchCategories {
-    "all", "art", "biography", "computers", "history", "medical", "poetry"
-}
-
-export enum BooksSearchSortDirection {
-    "relevance" , "newest"
-}
+// export enum BookSearchCategories {
+//     "all", "art", "biography", "computers", "history", "medical", "poetry"
+// }
+//
+// export enum BooksSearchSortDirection {
+//     "relevance" , "newest"
+// }
