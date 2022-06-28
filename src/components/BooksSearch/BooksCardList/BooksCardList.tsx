@@ -1,9 +1,9 @@
 import React from "react";
-import {BooksCardWrapper} from "../BooksCard/BooksCardWrapper";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, getBooksData, getTotalBooksCount} from "../../../redux/booksSearchReducer";
 import {Button, Typography} from "antd";
 import s from "./BooksCardList.module.css"
+import {BooksCardWrapper} from "../BooksCardWrapper/BooksCardWrapper";
 
 export const BooksCardList = () => {
     const dispatch = useDispatch();

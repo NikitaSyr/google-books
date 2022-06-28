@@ -1,5 +1,5 @@
 import {BooksSearchForm} from "./BooksSearchForm/BooksSearchForm";
-import {BooksCardList} from "./BookCardList/BooksCardList";
+import {BooksCardList} from "./BooksCardList/BooksCardList";
 import s from "./BooksSearch.module.css"
 import {useSelector} from "react-redux";
 import {getIsFetching} from "../../redux/booksSearchReducer";
