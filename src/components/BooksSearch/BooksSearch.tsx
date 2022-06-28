@@ -11,7 +11,7 @@ export const BooksSearch = () => {
     return (
         <div className={s.booksSearch}>
             <BooksSearchForm/>
-            {isFetching && <Spin size={"large"} className={s.antdSpin}/>}
+            {isFetching && <div className={s.antdSpin}><Spin size={"large"}/></div>}
             <BooksCardList/>
         </div>
     )

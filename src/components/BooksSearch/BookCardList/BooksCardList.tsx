@@ -2,8 +2,9 @@ import React from "react";
 import {BooksCardWrapper} from "../BooksCard/BooksCardWrapper";
 import {useDispatch, useSelector} from "react-redux";
 import {actions, getBooksData, getTotalBooksCount} from "../../../redux/booksSearchReducer";
-import {Button} from "antd";
+import {Button, Typography} from "antd";
 import s from "./BooksCardList.module.css"
+
 export const BooksCardList = () => {
     const dispatch = useDispatch();
     const booksData = useSelector(getBooksData);
@@ -19,9 +20,9 @@ export const BooksCardList = () => {
 
     return (
         <>
-            {totalBooksCount ? <div>
+            {totalBooksCount ? <Typography.Text strong={true}>
                 Found {totalBooksCount} results
-            </div> : null}
+            </Typography.Text> : null}
             <div className={s.booksCardList}>
                 {booksCardList}
             </div>
